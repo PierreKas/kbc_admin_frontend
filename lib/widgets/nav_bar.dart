@@ -1,11 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'package:kbc_admin/colors/colors.dart';
 import 'package:kbc_admin/components/appbar_text.dart';
-import 'package:kbc_admin/components/label.dart';
-import 'package:kbc_admin/pages/commissions/commission_page.dart';
-import 'package:kbc_admin/pages/discipleship/discipleship_classes_page.dart';
-import 'package:kbc_admin/pages/kingdom_home/kingdomhome_page.dart';
-import 'package:kbc_admin/pages/members_list.dart';
 
 class NavBar extends StatefulWidget {
   const NavBar({super.key});
@@ -15,6 +11,17 @@ class NavBar extends StatefulWidget {
 }
 
 class _NavBarState extends State<NavBar> {
+  String _currentPage = '/members';
+  @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+    // Update current page when route changes
+    final currentLocation = GoRouterState.of(context).uri.toString();
+    setState(() {
+      _currentPage = currentLocation;
+    });
+  }
+
   Widget desktopHome(BuildContext context) {
     return Container(
       padding: const EdgeInsets.symmetric(vertical: 20),
@@ -38,51 +45,84 @@ class _NavBarState extends State<NavBar> {
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            Row(
-              children: [
-                Image.asset(
-                  'assets/kbc_logo.jpeg',
-                  width: 32,
-                  height: 32,
+            MouseRegion(
+              //onHover:,
+              cursor: SystemMouseCursors.click,
+              child: GestureDetector(
+                onTap: () => context.go('/'),
+                child: Row(
+                  children: [
+                    Container(
+                      padding: const EdgeInsets.all(4),
+                      decoration: BoxDecoration(
+                        color: Colors.white,
+                        borderRadius: BorderRadius.circular(12),
+                        boxShadow: [
+                          BoxShadow(
+                            color: MyColors.black.withOpacity(0.1),
+                            blurRadius: 8,
+                            offset: const Offset(0, 2),
+                          )
+                        ],
+                      ),
+                      child: ClipRRect(
+                        borderRadius: BorderRadius.circular(8),
+                        child: Image.asset(
+                          'assets/kbc_logo.jpeg',
+                          width: 40,
+                          height: 40,
+                        ),
+                      ),
+                    ),
+                    const SizedBox(
+                      width: 14,
+                    ),
+                    const MyAppBarText(content: 'Kingdom Believers Church'),
+                  ],
                 ),
-                const SizedBox(
-                  width: 8,
-                ),
-                const MyAppBarText(content: 'Kingdom Believers Church'),
-              ],
+              ),
             ),
             Row(
               children: [
-                _navButton(context, 'Members', () {
-                  Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                          builder: (context) => const MembersList()));
-                }, Icons.group),
+                _navButton(
+                  context,
+                  'Members',
+                  () {
+                    context.go('/members');
+                  },
+                  Icons.group,
+                  isActive: _currentPage.startsWith('/members'),
+                ),
                 const SizedBox(width: 15),
-                _navButton(context, 'Announcements', () {}, Icons.campaign),
+                _navButton(
+                  context,
+                  'Kingdom homes',
+                  () {
+                    context.go('/kingdom-homes');
+                  },
+                  Icons.home,
+                  isActive: _currentPage.startsWith('/kingdom-homes'),
+                ),
                 const SizedBox(width: 15),
-                _navButton(context, 'Kingdom homes', () {
-                  Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                          builder: (context) => const KingdomhomePage()));
-                }, Icons.home),
+                _navButton(
+                  context,
+                  'Commissions',
+                  () {
+                    context.go('/commissions');
+                  },
+                  Icons.assignment,
+                  isActive: _currentPage.startsWith('/commissions'),
+                ),
                 const SizedBox(width: 15),
-                _navButton(context, 'Commissions', () {
-                  Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                          builder: (context) => const CommissionPage()));
-                }, Icons.assignment),
-                const SizedBox(width: 15),
-                _navButton(context, 'Discipleship Classes', () {
-                  Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                          builder: (context) =>
-                              const DiscipleshipClassesPage()));
-                }, Icons.school),
+                _navButton(
+                  context,
+                  'Discipleship Classes',
+                  () {
+                    context.go('/classes');
+                  },
+                  Icons.school,
+                  isActive: _currentPage.startsWith('/classes'),
+                ),
                 const SizedBox(width: 15),
                 _navButton(context, 'Logout', () {}, Icons.logout,
                     color: MyColors.bordeauxRed),
@@ -95,13 +135,18 @@ class _NavBarState extends State<NavBar> {
   }
 
   Widget _navButton(
-      BuildContext context, String text, VoidCallback onPressed, IconData icon,
-      {Color? color}) {
+    BuildContext context,
+    String text,
+    VoidCallback onPressed,
+    IconData icon, {
+    bool isActive = false,
+    Color? color,
+  }) {
     return ElevatedButton(
         onPressed: onPressed,
         style: ElevatedButton.styleFrom(
           foregroundColor: Colors.white,
-          backgroundColor: color ?? MyColors.amber,
+          backgroundColor: isActive ? MyColors.amber : MyColors.bordeauxRed,
           padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 10),
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(8),
@@ -112,14 +157,21 @@ class _NavBarState extends State<NavBar> {
           children: [
             Icon(
               icon,
-              color: MyColors.white,
+              color: isActive ? MyColors.white : MyColors.black,
             ),
             const SizedBox(
               width: 5,
             ),
-            MyTextFieldLabel(
-              labelContent: text,
-            ),
+            Text(
+              text,
+              textAlign: TextAlign.start,
+              style: TextStyle(
+                  color: isActive
+                      ? MyColors.black.withOpacity(0.7)
+                      : MyColors.white,
+                  fontWeight: FontWeight.bold,
+                  fontSize: 14),
+            )
           ],
         ));
   }

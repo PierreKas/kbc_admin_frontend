@@ -4,9 +4,7 @@ import 'package:kbc_admin/colors/colors.dart';
 import 'package:kbc_admin/components/appbar_text.dart';
 import 'package:kbc_admin/components/buttons.dart';
 import 'package:kbc_admin/components/label.dart';
-import 'package:kbc_admin/components/text_content.dart';
 import 'package:kbc_admin/components/text_hearder.dart';
-import 'package:kbc_admin/components/textfields.dart';
 import 'package:kbc_admin/pages/members_list.dart';
 import 'package:kbc_admin/responsive/dimensions.dart';
 

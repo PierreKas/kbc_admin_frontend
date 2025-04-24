@@ -7,7 +7,6 @@ import 'package:kbc_admin/components/text_content.dart';
 import 'package:kbc_admin/components/textfields.dart';
 import 'package:kbc_admin/controller/kingdomhome_controller.dart';
 import 'package:kbc_admin/models/kingdom_home.dart';
-import 'package:kbc_admin/pages/home_page.dart';
 import 'package:kbc_admin/pages/kingdom_home/kingdomhome_page.dart';
 
 class CreateKingdomHome extends StatefulWidget {

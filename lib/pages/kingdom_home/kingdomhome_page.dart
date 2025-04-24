@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:kbc_admin/colors/colors.dart';
 import 'package:kbc_admin/components/appbar_text.dart';
 import 'package:kbc_admin/components/buttons.dart';
@@ -283,14 +282,6 @@ class _KingdomhomePageState extends State<KingdomhomePage> {
             MyTextHeader(
               content: kingdomHome.name,
             ),
-            // Container(
-            //   padding: const EdgeInsets.all(15),
-            //   decoration: BoxDecoration(
-            //     borderRadius: BorderRadius.circular(10),
-            //     color: MyColors.white.withOpacity(0.5),
-            //   ),
-            //   child: MyTextHeader(content: kingdomHome.!),
-            // )
           ],
         ),
       ),

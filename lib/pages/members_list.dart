@@ -1,6 +1,5 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:kbc_admin/colors/colors.dart';
 import 'package:kbc_admin/components/search_textfields.dart';
 import 'package:kbc_admin/controller/membership_controller.dart';
@@ -220,26 +219,6 @@ class _MembersListState extends State<MembersList> {
                   style: TextStyle(
                       color: getBoolColors(member.hasCompletedClasses)),
                 )),
-                // DataCell(
-                //   Container(
-                //     padding:
-                //         const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
-                //     decoration: BoxDecoration(
-                //       color: getQuantityColor(product.remainingQuantity!),
-                //       borderRadius: BorderRadius.circular(20),
-                //     ),
-                //     child: Text(
-                //       product.remainingQuantity.toString(),
-                //       style: TextStyle(
-                //         color: getQuantityColor(product.remainingQuantity!)
-                //             .withGreen(100)
-                //             .withRed(100)
-                //             .withBlue(100),
-                //         fontWeight: FontWeight.bold,
-                //       ),
-                //     ),
-                //   ),
-                // ),
               ],
             );
           }).toList(),
@@ -259,18 +238,19 @@ class _MembersListState extends State<MembersList> {
             ))
           : Stack(
               children: [
-                Padding(
-                  padding: const EdgeInsets.all(24.0),
-                  child: LayoutBuilder(
-                    builder: (context, constraints) {
-                      if (constraints.maxWidth > mobileWidth) {
-                        return desktop();
-                        //return const HomePage();
-                      } else {
-                        return const HomePage();
-                      }
-                    },
-                  ),
+                // if (currentWidth >= tabletWidth) const NavBar(),
+                // const SizedBox(
+                //   height: 15,
+                // ),
+                LayoutBuilder(
+                  builder: (context, constraints) {
+                    if (constraints.maxWidth > mobileWidth) {
+                      return desktop();
+                      //return const HomePage();
+                    } else {
+                      return const HomePage();
+                    }
+                  },
                 ),
                 Center(
                   child: Opacity(
@@ -296,43 +276,49 @@ class _MembersListState extends State<MembersList> {
         const SizedBox(
           height: 15,
         ),
-        Container(
-          padding: const EdgeInsets.all(20),
-          decoration: BoxDecoration(
-            color: Colors.white,
-            borderRadius: BorderRadius.circular(15),
-            boxShadow: [
-              BoxShadow(
-                color: Colors.grey.withOpacity(0.1),
-                spreadRadius: 2,
-                blurRadius: 5,
-                offset: const Offset(0, 3),
-              ),
-            ],
+        Padding(
+          padding: const EdgeInsets.only(
+            left: 24.0,
+            right: 24,
           ),
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              Text(
-                'List of members',
-                style: TextStyle(
-                  color: MyColors.black.withOpacity(0.8),
-                  fontSize: 24,
-                  fontWeight: FontWeight.bold,
+          child: Container(
+            padding: const EdgeInsets.all(20),
+            decoration: BoxDecoration(
+              color: Colors.white,
+              borderRadius: BorderRadius.circular(15),
+              boxShadow: [
+                BoxShadow(
+                  color: Colors.grey.withOpacity(0.1),
+                  spreadRadius: 2,
+                  blurRadius: 5,
+                  offset: const Offset(0, 3),
                 ),
-              ),
-              SizedBox(
-                width: 300,
-                child: MySearchTextField(
-                  onChanged: filterMembers,
-                  controller: searchController,
-                  enabled: true,
-                  hintText: 'Search a member by name',
-                  obscureText: false,
-                  prefixIcon: Icons.search,
+              ],
+            ),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Text(
+                  'List of members',
+                  style: TextStyle(
+                    color: MyColors.black.withOpacity(0.8),
+                    fontSize: 24,
+                    fontWeight: FontWeight.bold,
+                  ),
                 ),
-              ),
-            ],
+                SizedBox(
+                  width: 300,
+                  child: MySearchTextField(
+                    onChanged: filterMembers,
+                    controller: searchController,
+                    enabled: true,
+                    hintText: 'Search a member by name',
+                    obscureText: false,
+                    prefixIcon: Icons.search,
+                  ),
+                ),
+              ],
+            ),
           ),
         ),
         const SizedBox(height: 24),
@@ -341,141 +327,15 @@ class _MembersListState extends State<MembersList> {
             scrollDirection: Axis.horizontal,
             child: SingleChildScrollView(
               scrollDirection: Axis.vertical,
-              child: dataTable(),
+              child: Padding(
+                padding:
+                    const EdgeInsets.only(left: 24.0, right: 24, bottom: 24),
+                child: dataTable(),
+              ),
             ),
           ),
         ),
       ],
     );
   }
-
-  // Widget mobileProductList() {
-  //   return ListView.builder(
-  //     itemCount: filteredMembersList.length,
-  //     itemBuilder: (context, index) {
-  //       final member = filteredMembersList[index];
-  //       return Card(
-  //         color: Colors.white,
-  //         margin: const EdgeInsets.symmetric(vertical: 8, horizontal: 4),
-  //         elevation: 2,
-  //         shape:
-  //             RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
-  //         child: ExpansionTile(
-  //           controlAffinity: ListTileControlAffinity.leading,
-  //           title: Text(
-  //             member.names,
-  //             style: const TextStyle(
-  //               color: chocolateColor,
-  //               fontWeight: FontWeight.bold,
-  //             ),
-  //           ),
-  //           subtitle: Text(
-  //             member.dateOfBirth!.toIso8601String(),
-  //             style: const TextStyle(color: chocolateColor),
-  //           ),
-  //           trailing: Container(
-  //             padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
-  //             decoration: BoxDecoration(
-  //               color: getQuantityColor(product.remainingQuantity!),
-  //               borderRadius: BorderRadius.circular(20),
-  //             ),
-  //             child: Text(
-  //               product.remainingQuantity.toString(),
-  //               style: TextStyle(
-  //                 color: getQuantityColor(product.remainingQuantity!)
-  //                     .withGreen(100)
-  //                     .withRed(100)
-  //                     .withBlue(100),
-  //                 fontWeight: FontWeight.bold,
-  //               ),
-  //             ),
-  //           ),
-  //           children: [
-  //             Padding(
-  //               padding: const EdgeInsets.all(16.0),
-  //               child: Column(
-  //                 crossAxisAlignment: CrossAxisAlignment.start,
-  //                 children: [
-  //                   _infoRow('Marque du produit', product.brand!),
-  //                   const SizedBox(height: 8),
-  //                   _infoRow('Prix de vente',
-  //                       '${product.sellingPrice?.toStringAsFixed(2)} \$'),
-  //                 ],
-  //               ),
-  //             ),
-  //           ],
-  //         ),
-  //       );
-  //     },
-  //   );
-  // }
-
-  Widget _infoRow(String label, String value) {
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-      children: [
-        Text(
-          label,
-          style: const TextStyle(
-            color: MyColors.amber,
-            fontWeight: FontWeight.w500,
-          ),
-        ),
-        Text(
-          value,
-          style: const TextStyle(color: MyColors.amber),
-        ),
-      ],
-    );
-  }
-
-  // Widget mobile() {
-  //   return Column(
-  //     children: [
-  //       Container(
-  //         padding: const EdgeInsets.all(20),
-  //         decoration: BoxDecoration(
-  //           color: Colors.white,
-  //           borderRadius: BorderRadius.circular(15),
-  //           boxShadow: [
-  //             BoxShadow(
-  //               color: Colors.grey.withOpacity(0.1),
-  //               spreadRadius: 2,
-  //               blurRadius: 5,
-  //               offset: const Offset(0, 3),
-  //             ),
-  //           ],
-  //         ),
-  //         child: Column(
-  //mainAxisAlignment: MainAxisAlignment.start,
-  //           children: [
-  //             const Text(
-  //               'Liste des produits',
-  //               style = const TextStyle(
-  //                 color: chocolateColor,
-  //                 fontSize: 24,
-  //                 fontWeight: FontWeight.bold,
-  //               ),
-  //             ),
-  //             SizedBox(
-  //               width = 300,
-  //               child = MySearchTextField(
-  //                 onChanged: filterProducts,
-  //                 controller: searchController,
-  //                 enabled: true,
-  //                 hintText: 'Chercher un produit',
-  //                 obscureText: false,
-  //                 prefixIcon: Icons.search,
-  //               ),
-  //             ),
-  //           ],
-  //         ),
-  //       ),
-  //       const SizedBox(height = 24),
-  //       Expanded(
-  //         child = mobileProductList(),
-  //       ),
-  //     ],
-  //   );
-  // }
 }
