@@ -82,51 +82,54 @@ class _NavBarState extends State<NavBar> {
                 ),
               ),
             ),
-            Row(
-              children: [
-                _navButton(
-                  context,
-                  'Members',
-                  () {
-                    context.go('/members');
-                  },
-                  Icons.group,
-                  isActive: _currentPage.startsWith('/members'),
-                ),
-                const SizedBox(width: 15),
-                _navButton(
-                  context,
-                  'Kingdom homes',
-                  () {
-                    context.go('/kingdom-homes');
-                  },
-                  Icons.home,
-                  isActive: _currentPage.startsWith('/kingdom-homes'),
-                ),
-                const SizedBox(width: 15),
-                _navButton(
-                  context,
-                  'Commissions',
-                  () {
-                    context.go('/commissions');
-                  },
-                  Icons.assignment,
-                  isActive: _currentPage.startsWith('/commissions'),
-                ),
-                const SizedBox(width: 15),
-                _navButton(
-                  context,
-                  'Discipleship Classes',
-                  () {
-                    context.go('/classes');
-                  },
-                  Icons.school,
-                  isActive: _currentPage.startsWith('/classes'),
-                ),
-                const SizedBox(width: 15),
-                _navButton(context, 'Logout', () {}, Icons.logout,
-                    color: MyColors.bordeauxRed),
-              ],
+            SingleChildScrollView(
+              scrollDirection: Axis.horizontal,
+              child: Row(
+                children: [
+                  _navButton(
+                    context,
+                    'Members',
+                    () {
+                      context.go('/members');
+                    },
+                    Icons.group,
+                    isActive: _currentPage.startsWith('/members'),
+                  ),
+                  const SizedBox(width: 15),
+                  _navButton(
+                    context,
+                    'Kingdom homes',
+                    () {
+                      context.go('/kingdom-homes');
+                    },
+                    Icons.home,
+                    isActive: _currentPage.startsWith('/kingdom-homes'),
+                  ),
+                  const SizedBox(width: 15),
+                  _navButton(
+                    context,
+                    'Commissions',
+                    () {
+                      context.go('/commissions');
+                    },
+                    Icons.assignment,
+                    isActive: _currentPage.startsWith('/commissions'),
+                  ),
+                  const SizedBox(width: 15),
+                  _navButton(
+                    context,
+                    'Discipleship Classes',
+                    () {
+                      context.go('/classes');
+                    },
+                    Icons.school,
+                    isActive: _currentPage.startsWith('/classes'),
+                  ),
+                  const SizedBox(width: 15),
+                  _navButton(context, 'Logout', () {}, Icons.logout,
+                      color: MyColors.bordeauxRed),
+                ],
+              ),
             )
           ],
         ),

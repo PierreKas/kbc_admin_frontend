@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
+import 'package:kbc_admin/colors/colors.dart';
 import 'package:kbc_admin/components/buttons.dart';
+import 'package:kbc_admin/components/dropdown.dart';
 import 'package:kbc_admin/components/label.dart';
 import 'package:kbc_admin/components/loading.dart';
 import 'package:kbc_admin/components/message_textfields.dart';
@@ -8,7 +11,6 @@ import 'package:kbc_admin/components/text_content.dart';
 import 'package:kbc_admin/components/textfields.dart';
 import 'package:kbc_admin/controller/classes_controller.dart';
 import 'package:kbc_admin/models/discipleship_classes.dart';
-import 'package:kbc_admin/pages/discipleship/discipleship_classes_page.dart';
 
 class CreateClass extends StatefulWidget {
   const CreateClass({super.key});
@@ -18,12 +20,14 @@ class CreateClass extends StatefulWidget {
 }
 
 class _CreateClassState extends State<CreateClass> {
-  final TextEditingController _level = TextEditingController();
+  // final TextEditingController _level = TextEditingController();
   final TextEditingController _title = TextEditingController();
   final TextEditingController _teacher = TextEditingController();
   final TextEditingController _program = TextEditingController();
   final TextEditingController _contact = TextEditingController();
   final TextEditingController _news = TextEditingController();
+
+  String? selectedClass;
   Widget desktopBody() {
     return Padding(
       padding: const EdgeInsets.symmetric(vertical: 30),
@@ -47,12 +51,30 @@ class _CreateClassState extends State<CreateClass> {
                       mainAxisSize: MainAxisSize.min,
                       children: [
                         const MyTextFieldLabel(labelContent: 'Level'),
-                        MyTextField(
-                          controller: _level,
-                          enabled: true,
-                          hintText: 'Class X',
-                          obscureText: false,
-                          prefixIcon: Icons.title,
+                        // MyTextField(
+                        //   controller: _level,
+                        //   enabled: true,
+                        //   hintText: 'Class X',
+                        //   obscureText: false,
+                        //   prefixIcon: Icons.title,
+                        // ),
+                        MyDropDownField(
+                          value: selectedClass,
+                          icon: Icons.person_outline,
+                          items: [
+                            _buildDropdownItem('class1', display: 'Class 1'),
+                            _buildDropdownItem('class2', display: 'Class 2'),
+                            _buildDropdownItem('class3', display: 'Class 3'),
+                            _buildDropdownItem('class4', display: 'Class 4'),
+                            _buildDropdownItem('class5', display: 'Class 5'),
+                            _buildDropdownItem('class6', display: 'Class 6'),
+                            _buildDropdownItem('class7', display: 'Class 7'),
+                          ],
+                          onChanged: (String? classe) {
+                            setState(() {
+                              selectedClass = classe;
+                            });
+                          },
                         ),
                         const SizedBox(
                           height: 16,
@@ -133,18 +155,18 @@ class _CreateClassState extends State<CreateClass> {
               MyButtons(
                   onPressed: () async {
                     showLoadingDialog(context, 'Posting announcement');
-                    if (_level.text.isEmpty ||
+                    if ( //_level.text.isEmpty ||
                         _title.text.isEmpty ||
-                        _teacher.text.isEmpty ||
-                        _program.text.isEmpty ||
-                        _contact.text.isEmpty ||
-                        _news.text.isEmpty) {
+                            _teacher.text.isEmpty ||
+                            _program.text.isEmpty ||
+                            _contact.text.isEmpty ||
+                            _news.text.isEmpty) {
                       Navigator.of(context).pop();
                       MySnackBar.showErrorMessage(
                           'All fields must be completed', context);
                     } else {
                       DiscipleshipClass discipleshipClass = DiscipleshipClass(
-                        level: _level.text,
+                        level: selectedClass!,
                         teacher: _teacher.text,
                         title: _title.text,
                         program: _program.text,
@@ -157,11 +179,12 @@ class _CreateClassState extends State<CreateClass> {
                       if (success) {
                         MySnackBar.showSuccessMessage(
                             'New class added', context);
-                        Navigator.pushReplacement(
-                            context,
-                            MaterialPageRoute(
-                                builder: (context) =>
-                                    const DiscipleshipClassesPage()));
+                        // Navigator.pushReplacement(
+                        //     context,
+                        //     MaterialPageRoute(
+                        //         builder: (context) =>
+                        //             const DiscipleshipClassesPage()));
+                        context.go('/classes');
                       } else {
                         MySnackBar.showErrorMessage(
                             'Failed to add a new class', context);
@@ -171,6 +194,18 @@ class _CreateClassState extends State<CreateClass> {
                   text: 'Add')
             ],
           ),
+        ),
+      ),
+    );
+  }
+
+  DropdownMenuItem<String> _buildDropdownItem(String value, {String? display}) {
+    return DropdownMenuItem(
+      value: value,
+      child: Text(
+        display ?? value,
+        style: const TextStyle(
+          color: MyColors.black,
         ),
       ),
     );

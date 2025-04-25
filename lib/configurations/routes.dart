@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:kbc_admin/pages/commissions/commission_page.dart';
+import 'package:kbc_admin/pages/commissions/create_commission.dart';
+import 'package:kbc_admin/pages/discipleship/create_class.dart';
 import 'package:kbc_admin/pages/discipleship/discipleship_classes_page.dart';
 import 'package:kbc_admin/pages/home_page.dart';
+import 'package:kbc_admin/pages/kingdom_home/create_kingdom_home.dart';
 import 'package:kbc_admin/pages/kingdom_home/kingdomhome_page.dart';
 import 'package:kbc_admin/pages/members_list.dart';
 
@@ -25,18 +28,42 @@ class Routes {
             builder: (BuildContext context, GoRouterState state) {
               return const CommissionPage();
             },
+            routes: <RouteBase>[
+              GoRoute(
+                path: 'add',
+                builder: (BuildContext context, GoRouterState state) {
+                  return const CreateCommission();
+                },
+              ),
+            ],
           ),
           GoRoute(
             path: 'classes',
             builder: (BuildContext context, GoRouterState state) {
               return const DiscipleshipClassesPage();
             },
+            routes: <RouteBase>[
+              GoRoute(
+                path: 'add',
+                builder: (BuildContext context, GoRouterState state) {
+                  return const CreateClass();
+                },
+              ),
+            ],
           ),
           GoRoute(
             path: 'kingdom-homes',
             builder: (BuildContext context, GoRouterState state) {
               return const KingdomhomePage();
             },
+            routes: <RouteBase>[
+              GoRoute(
+                path: 'add',
+                builder: (BuildContext context, GoRouterState state) {
+                  return const CreateKingdomHome();
+                },
+              ),
+            ],
           ),
         ])
   ]);

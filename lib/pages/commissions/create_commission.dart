@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'package:kbc_admin/components/buttons.dart';
 import 'package:kbc_admin/components/label.dart';
 import 'package:kbc_admin/components/loading.dart';
@@ -8,7 +9,6 @@ import 'package:kbc_admin/components/text_content.dart';
 import 'package:kbc_admin/components/textfields.dart';
 import 'package:kbc_admin/controller/commission_controller.dart';
 import 'package:kbc_admin/models/commissions.dart';
-import 'package:kbc_admin/pages/commissions/commission_page.dart';
 
 class CreateCommission extends StatefulWidget {
   const CreateCommission({super.key});
@@ -124,10 +124,11 @@ class _CreateCommissionState extends State<CreateCommission> {
                       if (success) {
                         MySnackBar.showSuccessMessage(
                             'Commission created', context);
-                        Navigator.pushReplacement(
-                            context,
-                            MaterialPageRoute(
-                                builder: (context) => const CommissionPage()));
+                        // Navigator.pushReplacement(
+                        //     context,
+                        //     MaterialPageRoute(
+                        //         builder: (context) => const CommissionPage()));
+                        context.pushReplacement('/commissions');
                       } else {
                         MySnackBar.showErrorMessage(
                             'Failed to create Commission', context);

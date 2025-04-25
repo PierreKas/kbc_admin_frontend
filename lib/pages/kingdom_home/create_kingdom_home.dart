@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'package:kbc_admin/components/buttons.dart';
 import 'package:kbc_admin/components/label.dart';
 import 'package:kbc_admin/components/loading.dart';
@@ -7,7 +8,6 @@ import 'package:kbc_admin/components/text_content.dart';
 import 'package:kbc_admin/components/textfields.dart';
 import 'package:kbc_admin/controller/kingdomhome_controller.dart';
 import 'package:kbc_admin/models/kingdom_home.dart';
-import 'package:kbc_admin/pages/kingdom_home/kingdomhome_page.dart';
 
 class CreateKingdomHome extends StatefulWidget {
   const CreateKingdomHome({super.key});
@@ -137,10 +137,11 @@ class _CreateKingdomHomeState extends State<CreateKingdomHome> {
                       if (success) {
                         MySnackBar.showSuccessMessage(
                             'Kingdom Home created', context);
-                        Navigator.pushReplacement(
-                            context,
-                            MaterialPageRoute(
-                                builder: (context) => const KingdomhomePage()));
+                        // Navigator.pushReplacement(
+                        //     context,
+                        //     MaterialPageRoute(
+                        //         builder: (context) => const KingdomhomePage()));
+                        context.go('/kingdom-homes');
                       } else {
                         MySnackBar.showErrorMessage(
                             'Failed to create Kingdom Home', context);

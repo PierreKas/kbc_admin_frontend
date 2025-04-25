@@ -10,7 +10,7 @@ class MyAppBarText extends StatelessWidget {
     return Text(content,
         style: const TextStyle(
           fontWeight: FontWeight.bold,
-          fontSize: 20,
+          fontSize: 22,
           color: MyColors.black,
         ));
   }

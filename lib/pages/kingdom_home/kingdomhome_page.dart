@@ -1,15 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:kbc_admin/colors/colors.dart';
 import 'package:kbc_admin/components/appbar_text.dart';
-import 'package:kbc_admin/components/buttons.dart';
 import 'package:kbc_admin/components/label.dart';
 import 'package:kbc_admin/components/text_content.dart';
 import 'package:kbc_admin/components/text_hearder.dart';
 import 'package:kbc_admin/controller/kingdomhome_controller.dart';
 import 'package:kbc_admin/models/kingdom_home.dart';
-import 'package:kbc_admin/pages/kingdom_home/create_kingdom_home.dart';
 import 'package:kbc_admin/responsive/dimensions.dart';
 import 'package:kbc_admin/widgets/nav_bar.dart';
+import 'package:kbc_admin/widgets/title_container.dart';
 
 class KingdomhomePage extends StatefulWidget {
   const KingdomhomePage({super.key});
@@ -93,24 +92,10 @@ class _KingdomhomePageState extends State<KingdomhomePage> {
           const SizedBox(
             height: 15,
           ),
-          Padding(
-            padding: const EdgeInsets.only(left: 30.0, right: 30),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                const MyAppBarText(content: 'Kingdom Home'),
-                MyButtons(
-                  onPressed: () {
-                    Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                            builder: (context) => const CreateKingdomHome()));
-                  },
-                  text: 'Add a Kingdom Home',
-                  icon: Icons.add,
-                )
-              ],
-            ),
+          const TitleContainer(
+            buttonLabel: 'Add a Kingdom home',
+            route: '/kingdom-homes/add',
+            title: 'Kingdom home',
           ),
           const SizedBox(
             height: 15,
