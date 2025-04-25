@@ -1,6 +1,8 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'package:kbc_admin/colors/colors.dart';
+import 'package:kbc_admin/components/buttons.dart';
 import 'package:kbc_admin/components/search_textfields.dart';
 import 'package:kbc_admin/controller/membership_controller.dart';
 import 'package:kbc_admin/models/membership.dart';
@@ -316,6 +318,13 @@ class _MembersListState extends State<MembersList> {
                     obscureText: false,
                     prefixIcon: Icons.search,
                   ),
+                ),
+                MyButtons(
+                  onPressed: () {
+                    context.go('/members/add');
+                  },
+                  text: 'Add a member',
+                  icon: Icons.add,
                 ),
               ],
             ),

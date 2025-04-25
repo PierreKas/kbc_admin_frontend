@@ -5,7 +5,7 @@ import 'package:kbc_admin/components/appbar_text.dart';
 import 'package:kbc_admin/components/buttons.dart';
 import 'package:kbc_admin/components/label.dart';
 import 'package:kbc_admin/components/text_hearder.dart';
-import 'package:kbc_admin/pages/members_list.dart';
+import 'package:kbc_admin/pages/members/members_list.dart';
 import 'package:kbc_admin/responsive/dimensions.dart';
 
 class Announcement extends StatefulWidget {

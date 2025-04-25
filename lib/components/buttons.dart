@@ -50,12 +50,14 @@ class MyButtons extends StatelessWidget {
               icon,
               color: MyColors.black,
             ),
-            Text(
-              text,
-              style: const TextStyle(
-                color: MyColors.black,
-                fontWeight: FontWeight.bold,
-                letterSpacing: 1.2,
+            Center(
+              child: Text(
+                text,
+                style: const TextStyle(
+                  color: MyColors.black,
+                  fontWeight: FontWeight.bold,
+                  letterSpacing: 1.2,
+                ),
               ),
             ),
           ],

@@ -160,69 +160,71 @@ class _DiscipleshipClassesPageState extends State<DiscipleshipClassesPage> {
                                 Expanded(
                                   child: Padding(
                                     padding: const EdgeInsets.all(8.0),
-                                    child: Column(
-                                      crossAxisAlignment:
-                                          CrossAxisAlignment.start,
-                                      children: [
-                                        // const MyAppBarText(content: 'Title: '),
-                                        // MyTextContent(
-                                        //     content:
-                                        //         '\t\t${discipleshipClass.title}'),
-                                        _classInfo(
-                                          label: 'Title',
-                                          value: discipleshipClass.title,
-                                          icon: Icons.label,
-                                        ),
-                                        const SizedBox(
-                                          height: 5,
-                                        ),
-                                        // const MyTextContent(
-                                        //     content: 'Teacher: '),
-                                        // MyTextContent(
-                                        //     content:
-                                        //         '\t\t${discipleshipClass.teacher}'),
-                                        _classInfo(
-                                          label: 'Teacher',
-                                          value: discipleshipClass.teacher,
-                                          icon: Icons.person,
-                                        ),
-                                        const SizedBox(
-                                          height: 5,
-                                        ),
-                                        // const MyTextContent(
-                                        //     content: 'Program: '),
-                                        // MyTextContent(
-                                        //     content:
-                                        //         '\t\t${discipleshipClass.program}'),
-                                        _classInfo(
-                                          label: 'Program',
-                                          value: discipleshipClass.program,
-                                          icon: Icons.access_time,
-                                        ),
-                                        const SizedBox(
-                                          height: 5,
-                                        ),
-                                        // const MyTextContent(
-                                        //     content: 'Contact: '),
-                                        // MyTextContent(
-                                        //     content:
-                                        //         '\t\t${discipleshipClass.contact}'),
-                                        const SizedBox(
-                                          height: 5,
-                                        ),
-                                        // const MyTextContent(content: 'News: '),
-                                        // MyTextContent(
-                                        //     content:
-                                        //         '\t\t${discipleshipClass.news}'),
-                                        _classInfo(
-                                          label: 'Program',
-                                          value: discipleshipClass.news,
-                                          icon: Icons.info_outline,
-                                        ),
-                                        const SizedBox(
-                                          height: 5,
-                                        ),
-                                      ],
+                                    child: SingleChildScrollView(
+                                      child: Column(
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.start,
+                                        children: [
+                                          // const MyAppBarText(content: 'Title: '),
+                                          // MyTextContent(
+                                          //     content:
+                                          //         '\t\t${discipleshipClass.title}'),
+                                          _classInfo(
+                                            label: 'Title',
+                                            value: discipleshipClass.title,
+                                            icon: Icons.label,
+                                          ),
+                                          const SizedBox(
+                                            height: 5,
+                                          ),
+                                          // const MyTextContent(
+                                          //     content: 'Teacher: '),
+                                          // MyTextContent(
+                                          //     content:
+                                          //         '\t\t${discipleshipClass.teacher}'),
+                                          _classInfo(
+                                            label: 'Teacher',
+                                            value: discipleshipClass.teacher,
+                                            icon: Icons.person,
+                                          ),
+                                          const SizedBox(
+                                            height: 5,
+                                          ),
+                                          // const MyTextContent(
+                                          //     content: 'Program: '),
+                                          // MyTextContent(
+                                          //     content:
+                                          //         '\t\t${discipleshipClass.program}'),
+                                          _classInfo(
+                                            label: 'Program',
+                                            value: discipleshipClass.program,
+                                            icon: Icons.access_time,
+                                          ),
+                                          const SizedBox(
+                                            height: 5,
+                                          ),
+                                          // const MyTextContent(
+                                          //     content: 'Contact: '),
+                                          // MyTextContent(
+                                          //     content:
+                                          //         '\t\t${discipleshipClass.contact}'),
+                                          const SizedBox(
+                                            height: 5,
+                                          ),
+                                          // const MyTextContent(content: 'News: '),
+                                          // MyTextContent(
+                                          //     content:
+                                          //         '\t\t${discipleshipClass.news}'),
+                                          _classInfo(
+                                            label: 'Info',
+                                            value: discipleshipClass.news,
+                                            icon: Icons.info_outline,
+                                          ),
+                                          const SizedBox(
+                                            height: 5,
+                                          ),
+                                        ],
+                                      ),
                                     ),
                                   ),
                                 ),

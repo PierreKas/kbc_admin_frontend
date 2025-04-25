@@ -1,18 +1,17 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'package:intl/intl.dart';
 import 'package:kbc_admin/colors/colors.dart';
 import 'package:kbc_admin/components/appbar_text.dart';
-import 'package:kbc_admin/components/buttons.dart';
 import 'package:kbc_admin/components/label.dart';
 import 'package:kbc_admin/components/snack_bar.dart';
 import 'package:kbc_admin/components/text_content.dart';
 import 'package:kbc_admin/components/text_hearder.dart';
 import 'package:kbc_admin/controller/announcement_controller.dart';
 import 'package:kbc_admin/models/announcement.dart';
-import 'package:kbc_admin/pages/announcements/create_announcement.dart';
-import 'package:kbc_admin/pages/announcements/edit_announcement.dart';
 import 'package:kbc_admin/responsive/dimensions.dart';
 import 'package:kbc_admin/widgets/nav_bar.dart';
+import 'package:kbc_admin/widgets/title_container.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -96,24 +95,29 @@ class _HomePageState extends State<HomePage> {
           const SizedBox(
             height: 15,
           ),
-          Padding(
-            padding: const EdgeInsets.only(left: 30.0, right: 30),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                const MyAppBarText(content: 'Announcements'),
-                MyButtons(
-                  onPressed: () {
-                    Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                            builder: (context) => const CreateAnnouncement()));
-                  },
-                  text: 'Add an announcement',
-                  icon: Icons.add,
-                )
-              ],
-            ),
+          // Padding(
+          //   padding: const EdgeInsets.only(left: 30.0, right: 30),
+          //   child: Row(
+          //     mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          //     children: [
+          //       const MyAppBarText(content: 'Announcements'),
+          //       MyButtons(
+          //         onPressed: () {
+          //           Navigator.push(
+          //               context,
+          //               MaterialPageRoute(
+          //                   builder: (context) => const CreateAnnouncement()));
+          //         },
+          //         text: 'Add an announcement',
+          //         icon: Icons.add,
+          //       )
+          //     ],
+          //   ),
+          // ),
+          const TitleContainer(
+            buttonLabel: 'Add an announcement',
+            route: '/announcements/add',
+            title: 'Announcements',
           ),
           const SizedBox(
             height: 15,
@@ -290,12 +294,13 @@ class _HomePageState extends State<HomePage> {
                   IconButton(
                     tooltip: 'Edit',
                     onPressed: () {
-                      Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                              builder: (context) => EditAnnouncement(
-                                    id: announcement.id!,
-                                  )));
+                      // Navigator.push(
+                      //     context,
+                      //     MaterialPageRoute(
+                      //         builder: (context) => EditAnnouncement(
+                      //               id: announcement.id!,
+                      //             )));
+                      context.go('/announcements/edit/${announcement.id}');
                     },
                     icon: const Icon(
                       Icons.edit,
@@ -331,11 +336,7 @@ class _HomePageState extends State<HomePage> {
                                     MySnackBar.showSuccessMessage(
                                         'Announcement deleted, refresh the page',
                                         context);
-                                    Navigator.pushReplacement(
-                                        context,
-                                        MaterialPageRoute(
-                                            builder: (context) =>
-                                                const HomePage()));
+                                    context.pushReplacement('/');
                                   } else {
                                     MySnackBar.showErrorMessage(
                                         'Failed to delete', context);

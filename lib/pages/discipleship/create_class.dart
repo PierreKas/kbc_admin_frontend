@@ -184,7 +184,7 @@ class _CreateClassState extends State<CreateClass> {
                         //     MaterialPageRoute(
                         //         builder: (context) =>
                         //             const DiscipleshipClassesPage()));
-                        context.go('/classes');
+                        context.pushReplacement('/classes');
                       } else {
                         MySnackBar.showErrorMessage(
                             'Failed to add a new class', context);

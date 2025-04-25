@@ -141,7 +141,7 @@ class _CreateKingdomHomeState extends State<CreateKingdomHome> {
                         //     context,
                         //     MaterialPageRoute(
                         //         builder: (context) => const KingdomhomePage()));
-                        context.go('/kingdom-homes');
+                        context.pushReplacement('/kingdom-homes');
                       } else {
                         MySnackBar.showErrorMessage(
                             'Failed to create Kingdom Home', context);
