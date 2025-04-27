@@ -231,106 +231,117 @@ class _MembersListState extends State<MembersList> {
 
   @override
   Widget build(BuildContext context) {
+    double currentWidth = MediaQuery.of(context).size.width;
     return Scaffold(
       backgroundColor: Colors.grey[50],
-      body: isLoading
-          ? const Center(
-              child: CircularProgressIndicator(
-              color: MyColors.amber,
-            ))
-          : Stack(
-              children: [
-                // if (currentWidth >= tabletWidth) const NavBar(),
-                // const SizedBox(
-                //   height: 15,
-                // ),
-                LayoutBuilder(
-                  builder: (context, constraints) {
-                    if (constraints.maxWidth > mobileWidth) {
-                      return desktop();
-                      //return const HomePage();
-                    } else {
-                      return const HomePage();
-                    }
-                  },
-                ),
-                Center(
-                  child: Opacity(
-                    opacity: 0.3,
-                    child: Image.asset(
-                      'assets/kbc_logo.jpeg',
-                      fit: BoxFit.cover,
-                      width: 150,
-                      height: 150,
+      body: Column(
+        children: [
+          if (currentWidth >= tabletWidth) const NavBar(),
+          const SizedBox(
+            height: 15,
+          ),
+          Padding(
+            padding: const EdgeInsets.only(
+              left: 24.0,
+              right: 24,
+            ),
+            child: Container(
+              padding: const EdgeInsets.all(20),
+              decoration: BoxDecoration(
+                color: Colors.white,
+                borderRadius: BorderRadius.circular(15),
+                boxShadow: [
+                  BoxShadow(
+                    color: Colors.grey.withOpacity(0.1),
+                    spreadRadius: 2,
+                    blurRadius: 5,
+                    offset: const Offset(0, 3),
+                  ),
+                ],
+              ),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Text(
+                    'List of members',
+                    style: TextStyle(
+                      color: MyColors.black.withOpacity(0.8),
+                      fontSize: 24,
+                      fontWeight: FontWeight.bold,
                     ),
                   ),
-                ),
-              ],
+                  SizedBox(
+                    width: 300,
+                    child: MySearchTextField(
+                      onChanged: filterMembers,
+                      controller: searchController,
+                      enabled: true,
+                      hintText: 'Search a member by name',
+                      obscureText: false,
+                      prefixIcon: Icons.search,
+                    ),
+                  ),
+                  MyButtons(
+                    onPressed: () {
+                      context.go('/members/add');
+                    },
+                    text: 'Add a member',
+                    icon: Icons.add,
+                  ),
+                ],
+              ),
             ),
+          ),
+          const SizedBox(height: 24),
+          Expanded(
+            child: isLoading
+                ? const CircularProgressIndicator(
+                    color: MyColors.amber,
+                  )
+                : Stack(
+                    children: [
+                      // if (currentWidth >= tabletWidth) const NavBar(),
+                      // const SizedBox(
+                      //   height: 15,
+                      // ),
+                      LayoutBuilder(
+                        builder: (context, constraints) {
+                          if (constraints.maxWidth > mobileWidth) {
+                            return desktop();
+                            //return const HomePage();
+                          } else {
+                            return const HomePage();
+                          }
+                        },
+                      ),
+                      Center(
+                        child: Opacity(
+                          opacity: 0.3,
+                          child: Image.asset(
+                            'assets/kbc_logo.jpeg',
+                            fit: BoxFit.cover,
+                            width: 150,
+                            height: 150,
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+          ),
+        ],
+      ),
     );
   }
 
   Widget desktop() {
-    double currentWidth = MediaQuery.of(context).size.width;
+    // double currentWidth = MediaQuery.of(context).size.width;
     return Column(
       children: [
-        if (currentWidth >= tabletWidth) const NavBar(),
-        const SizedBox(
-          height: 15,
-        ),
-        Padding(
-          padding: const EdgeInsets.only(
-            left: 24.0,
-            right: 24,
-          ),
-          child: Container(
-            padding: const EdgeInsets.all(20),
-            decoration: BoxDecoration(
-              color: Colors.white,
-              borderRadius: BorderRadius.circular(15),
-              boxShadow: [
-                BoxShadow(
-                  color: Colors.grey.withOpacity(0.1),
-                  spreadRadius: 2,
-                  blurRadius: 5,
-                  offset: const Offset(0, 3),
-                ),
-              ],
-            ),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Text(
-                  'List of members',
-                  style: TextStyle(
-                    color: MyColors.black.withOpacity(0.8),
-                    fontSize: 24,
-                    fontWeight: FontWeight.bold,
-                  ),
-                ),
-                SizedBox(
-                  width: 300,
-                  child: MySearchTextField(
-                    onChanged: filterMembers,
-                    controller: searchController,
-                    enabled: true,
-                    hintText: 'Search a member by name',
-                    obscureText: false,
-                    prefixIcon: Icons.search,
-                  ),
-                ),
-                MyButtons(
-                  onPressed: () {
-                    context.go('/members/add');
-                  },
-                  text: 'Add a member',
-                  icon: Icons.add,
-                ),
-              ],
-            ),
-          ),
-        ),
-        const SizedBox(height: 24),
+        // if (currentWidth >= tabletWidth) const NavBar(),
+        // const SizedBox(
+        //   height: 15,
+        // ),
+
         Expanded(
           child: SingleChildScrollView(
             scrollDirection: Axis.horizontal,

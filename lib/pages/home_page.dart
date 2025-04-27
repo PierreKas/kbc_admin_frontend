@@ -95,25 +95,6 @@ class _HomePageState extends State<HomePage> {
           const SizedBox(
             height: 15,
           ),
-          // Padding(
-          //   padding: const EdgeInsets.only(left: 30.0, right: 30),
-          //   child: Row(
-          //     mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          //     children: [
-          //       const MyAppBarText(content: 'Announcements'),
-          //       MyButtons(
-          //         onPressed: () {
-          //           Navigator.push(
-          //               context,
-          //               MaterialPageRoute(
-          //                   builder: (context) => const CreateAnnouncement()));
-          //         },
-          //         text: 'Add an announcement',
-          //         icon: Icons.add,
-          //       )
-          //     ],
-          //   ),
-          // ),
           const TitleContainer(
             buttonLabel: 'Add an announcement',
             route: '/announcements/add',
